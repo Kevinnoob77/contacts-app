@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    $r = $stmt->fetch();
 
    if (Contact::delete($id)) {
-      header("Location: index.php?action=" . DELETE_SUCCESS_CODE);
+      header("Location: home.php?action=" . DELETE_SUCCESS_CODE);
    } else {
       die("Error: Contact not found!" . PHP_EOL);
    }

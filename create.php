@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $contact->save(); // Insert into database
-    header("Location: index.php?action=" . CREATE_SUCCESS_CODE);
+    header("Location: home.php?action=" . CREATE_SUCCESS_CODE);
   }
 }
 

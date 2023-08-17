@@ -11,13 +11,13 @@ $id = isset($_GET['id']) ? $_GET['id'] : null;
 $categories = Category::find_all();
 
 if (!filter_var($id, FILTER_VALIDATE_INT)) {
-  header("Location: index.php");
+  header("Location: home.php");
 }
 
 $contact = Contact::get_by_id($id);
 
 if (!$contact) {
-  $index_url = '<a href="index.php">Return</a>';
+  $index_url = '<a href="home.php">Return</a>';
   die("Error 404: Contact not found with id " . $_GET['id'] . " " . $index_url);
 }
 
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // update record (if no change the image, be will update with previous image: $contact->set_image_name($previous_ima))
     $updated_contact = $contact->update();
     if ($updated_contact)
-      header("Location: index.php?action=" . UPDATE_SUCCESS_CODE);
+      header("Location: home.php?action=" . UPDATE_SUCCESS_CODE);
     else {
       die($updated_contact);
     }
