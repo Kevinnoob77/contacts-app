@@ -1,0 +1,18 @@
+{
+    "name": "users/app",
+    "description": "Users crud with php and mysql",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Contacts\\Models\\": "classes",
+            "Contacts\\Config\\": "includes/config"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kevingg",
+            "email": "kevinhdez592@gmail.com"
+        }
+    ],
+    "require": {}
+}
