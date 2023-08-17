@@ -219,6 +219,27 @@ a {
   }
 }
 
+body.login-page {
+  background-image: url('../../assets/img/background.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+}
+
+// Login
+.login-content {
+  text-align: center;
+  margin: 22rem .5rem 1rem;
+  h1 {
+    margin-bottom: 1.8rem;
+  }
+  a {
+    display: inline-block;
+    font-size: 1.8rem;
+  }
+}
+
 // Contacts
 .without-contacts {
   padding: 3rem 2rem;

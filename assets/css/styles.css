@@ -179,6 +179,26 @@ a {
   color: #e2dede;
 }
 
+body.login-page {
+  background-image: url("../../assets/img/background.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+}
+
+.login-content {
+  text-align: center;
+  margin: 22rem 0.5rem 1rem;
+}
+.login-content h1 {
+  margin-bottom: 1.8rem;
+}
+.login-content a {
+  display: inline-block;
+  font-size: 1.8rem;
+}
+
 .without-contacts {
   padding: 3rem 2rem;
   border-radius: 5px;
