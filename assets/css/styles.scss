@@ -1,6 +1,6 @@
 // @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-$font: 'Monserrat', sans-serif;
+$font: 'Open Sans', sans-serif;
 
 $dark: #181717;
 $light_dark: #242323;
@@ -35,11 +35,30 @@ body {
   font-size: 1.6rem;
   font-family: $font;
   position: relative;
+  font-family: $font;
 }
 
 a {
   text-decoration: none;
   color: $grey;
+}
+
+h1 {
+  font-size: 3.6rem;
+}
+
+h2 {
+  font-size: 3rem;
+}
+
+h3 {
+  font-size: 2.6rem;
+}
+
+h1,
+h2,
+h3 {
+  margin: 1rem;
 }
 
 .container {
@@ -129,6 +148,11 @@ a {
     display: flex;
     justify-content: center;
   }
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
 }
 
 .align-right {
@@ -230,14 +254,80 @@ body.login-page {
 // Login
 .login-content {
   text-align: center;
-  margin: 22rem .5rem 1rem;
+  margin: 10rem auto 1rem;
+  max-width: 55rem;
+  width: 97%;
+
   h1 {
-    margin-bottom: 1.8rem;
+    margin-bottom: 2rem;
   }
+
+  p {
+    margin-top: 2.5rem;
+    font-size: 2rem;
+      // font-weight: 600;
+  }
+
+  h3 {
+    font-size: 2.8rem;
+      font-weight: 600;
+    // color: rgb(37, 137, 231);
+  }
+
   a {
     display: inline-block;
     font-size: 1.8rem;
   }
+}
+
+.login-form {
+  margin-top: 4rem;
+
+  .field {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    align-items: center;
+
+
+    .align-right-text {
+      min-width: 7.8rem;
+      text-align: right;
+    }
+
+    label {
+      font-size: 1.7rem;
+      // font-weight: 600;
+    }
+
+    input {
+      width: 74%;
+      border: none;
+      padding: .8rem .6rem;
+      border-radius: 5px;
+      background-color: $white;
+      font-size: 1.5rem;
+
+      @media (min-width: $phone) {
+        width: 80%;
+      }
+    }
+  }
+
+  .flex {
+    margin-top: 4rem;
+    align-items: center;
+
+    a {
+      color: #fff;
+      font-weight: 600;
+    }
+  }
+
+  .align-right {
+    margin-top: 3rem;
+  }
+
 }
 
 // Contacts

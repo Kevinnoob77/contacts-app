@@ -14,13 +14,32 @@ body {
   background-color: #181717;
   color: #f8f8f8;
   font-size: 1.6rem;
-  font-family: "Monserrat", sans-serif;
+  font-family: "Open Sans", sans-serif;
   position: relative;
+  font-family: "Open Sans", sans-serif;
 }
 
 a {
   text-decoration: none;
   color: #d3cdcd;
+}
+
+h1 {
+  font-size: 3.6rem;
+}
+
+h2 {
+  font-size: 3rem;
+}
+
+h3 {
+  font-size: 2.6rem;
+}
+
+h1,
+h2,
+h3 {
+  margin: 1rem;
 }
 
 .container {
@@ -107,6 +126,11 @@ a {
   }
 }
 
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
 .align-right {
   display: flex;
   justify-content: right;
@@ -189,14 +213,65 @@ body.login-page {
 
 .login-content {
   text-align: center;
-  margin: 22rem 0.5rem 1rem;
+  margin: 10rem auto 1rem;
+  max-width: 55rem;
+  width: 97%;
 }
 .login-content h1 {
-  margin-bottom: 1.8rem;
+  margin-bottom: 2rem;
+}
+.login-content p {
+  margin-top: 2.5rem;
+  font-size: 2rem;
+}
+.login-content h3 {
+  font-size: 2.8rem;
+  font-weight: 600;
 }
 .login-content a {
   display: inline-block;
   font-size: 1.8rem;
+}
+
+.login-form {
+  margin-top: 4rem;
+}
+.login-form .field {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+.login-form .field .align-right-text {
+  min-width: 7.8rem;
+  text-align: right;
+}
+.login-form .field label {
+  font-size: 1.7rem;
+}
+.login-form .field input {
+  width: 74%;
+  border: none;
+  padding: 0.8rem 0.6rem;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  font-size: 1.5rem;
+}
+@media (min-width: 480px) {
+  .login-form .field input {
+    width: 80%;
+  }
+}
+.login-form .flex {
+  margin-top: 4rem;
+  align-items: center;
+}
+.login-form .flex a {
+  color: #fff;
+  font-weight: 600;
+}
+.login-form .align-right {
+  margin-top: 3rem;
 }
 
 .without-contacts {
