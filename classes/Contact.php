@@ -136,7 +136,8 @@ class Contact
     else if (count($last_name) == 2) {
       $this->set_paternal_last_name($last_name[0]);
       $this->set_maternal_last_name($last_name[1]);
-    }
+    } else if (count($last_name) > 2)
+      $this->paternal_last_name = trim($data['last_name']);
   }
 
   private static function create_from_array(array $arr): Contact {

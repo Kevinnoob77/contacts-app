@@ -2,6 +2,10 @@
 
 require_once __DIR__ .  '/../includes/app.php';
 
+if (!is_authenticate()) {
+  header("Location: ../index.php");
+}
+
 use Contacts\Models\Category;
 
 $categories = Category::find_all();

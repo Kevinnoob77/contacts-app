@@ -25,3 +25,8 @@ function debug($var) {
   var_dump($var);
   echo '</pre>';
 }
+
+function is_authenticate(): bool {
+  session_start();
+  return $_SESSION["username"] ?? false;
+}

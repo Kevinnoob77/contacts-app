@@ -2,6 +2,10 @@
 
 require 'includes/app.php';
 
+if (is_authenticate()) {
+   header("Location: home.php");
+}
+
 use Contacts\Models\User;
 
 $user = new User('', '', '');
@@ -18,7 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    if (!$error) {
       if (!$user->existing_user()) {
          $user->save();
+         session_start();
+         $_SESSION["username"] = $user->get_username();
+         $_SESSION["email"] = $user->get_email();
          header("Location: home.php");
+         return;
       }
       $error = User::USER_REGISTERED_ERROR;
    }

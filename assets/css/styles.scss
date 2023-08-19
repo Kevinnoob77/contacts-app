@@ -185,8 +185,8 @@ h3 {
     // font-size: 1.8rem;
     font-size: 1.4rem;
   }
-  .error span {
-  }
+
+  .error span {}
 }
 
 .alert.error {
@@ -196,7 +196,7 @@ h3 {
 
 .alert.error.absolute {
   position: absolute;
-  top: 7%;
+  top: 13%;
 }
 
 
@@ -218,12 +218,23 @@ h3 {
   background-color: $light_dark;
 }
 
-.nav {
+.nav,
+.nav-sections,
+.nav-email-logout {
   display: flex;
   align-items: center;
   gap: 2rem;
+}
+
+.nav-sections {
+  gap: 1.2rem;
+}
+
+.nav {
   padding: 2.4rem 0 2rem;
   margin-left: 2rem;
+  justify-content: space-between;
+  max-width: 95%;
 
   .logo {
     display: flex;
@@ -244,6 +255,13 @@ h3 {
       color: $light_grey;
     }
   }
+}
+
+.nav-email-logout {
+  a {
+    // color: $white;
+  }
+  p {color: $light_grey;}
 }
 
 body.login-page {
@@ -464,6 +482,7 @@ body.login-page {
 .categories-container {
   display: grid;
   gap: 3rem;
+  margin-bottom: 8rem;
 
   @media (min-width: $tablet) {
     grid-template-columns: 1fr 1fr;
@@ -628,12 +647,17 @@ body.login-page {
   form {
     // margin-left: 2rem;
     // text-align: center;
-    display: flex;
-    justify-content: space-around;
+    // display: flex;
+    // flex-direction: column;
+      // align-items: start;
+    // justify-content: space-around;
 
     select {
       font-size: 1.5rem;
-
+      max-width: 15rem;
+      margin-bottom: 2rem;
+      padding: .6rem 1rem;
+      
       option {
         padding: .4rem .8rem;
         // font-size: 1.9rem;

@@ -2,6 +2,11 @@
 
 require 'includes/app.php';
 
+if (!is_authenticate()) {
+  header("Location: index.php");
+  return;
+}
+
 use Contacts\Config\Database;
 use Contacts\Models\Contact;
 

@@ -1,5 +1,7 @@
 <?php
 
+if (!isset($_SESSION)) session_start();
+
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $login_pages = $uri == '/' || $uri == '/index.php' || $uri == '/register.php';
 
@@ -26,17 +28,25 @@ $login_pages = $uri == '/' || $uri == '/index.php' || $uri == '/register.php';
 
     <div class="header-content">
       <nav class="nav">
-        <a class="logo" href="<?= $login_pages ? 'index.php' : '/home.php' ?>">
-          <img class="logo-img" src="/assets/img/Official PHP Logo.svg" alt="PHP Logo">
-          <p>ContactsApp</p>
-        </a>
+        <div class="nav-sections">
+          <a class="logo" href="<?= $login_pages ? 'index.php' : '/home.php' ?>">
+            <img class="logo-img" src="/assets/img/Official PHP Logo.svg" alt="PHP Logo">
+            <p>ContactsApp</p>
+          </a>
 
-        <?php if ($login_pages) { ?>
-          <a class="nav-link" href="register.php">Register</a>
-        <?php } else { ?>
-          <a class="nav-link" href="/home.php">Home</a>
-          <a class="nav-link" href="/categories/categories.php">Categories</a>
-        <?php } ?>
+          <?php if ($login_pages) { ?>
+            <a class="nav-link" href="register.php">Register</a>
+          <?php } else { ?>
+            <a class="nav-link" href="/home.php">Home</a>
+            <a class="nav-link" href="/categories/categories.php">Categories</a>
+          <?php } ?>
+        </div>
+        <?php if (isset($_SESSION["username"])) : ?>
+          <div class="nav-email-logout">
+            <a href="logout.php">Log out</a>
+            <p class="email"><?= $_SESSION["email"] ?></p>
+          </div>
+        <?php endif ?>
       </nav>
     </div>
 

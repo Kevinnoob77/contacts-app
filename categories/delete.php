@@ -2,6 +2,10 @@
 
 require '../includes/app.php';
 
+if (!is_authenticate()) {
+  header("Location: ../index.php");
+}
+
 use Contacts\Models\Category;
 use Contacts\Models\Contact;
 
@@ -51,8 +55,11 @@ include_template('header');
                   <?php endif;
                endforeach; ?>
             </select>
-            <input type="hidden" name="id" value="<?= $id ?>">
-            <button class="btn btn-red" type="submit">Delete</button>
+            <div class="contact-actions">
+               <input type="hidden" name="id" value="<?= $id ?>">
+               <a href="categories.php" class="btn btn-blue">Cancel</a>
+               <button class="btn btn-red" type="submit">Delete</button>
+            </div>
          </form>
       </div>
    </div>

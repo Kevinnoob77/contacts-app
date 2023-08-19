@@ -21,7 +21,7 @@ class User
    public function __construct(
       private string $_username,
       private string $_email,
-      private string $_password
+      private ?string $_password
    ) {
    }
 
@@ -43,6 +43,15 @@ class User
          return null;
 
       return self::create_from_array($statement->fetch(PDO::FETCH_ASSOC));
+   }
+
+   public function set_attributes(): void {
+      debug($this->_email);
+      $statement = Database::get_instance()->query("SELECT * FROM users WHERE email = '$this->_email'");
+      $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+      $this->_id = $result['id'];
+      $this->_username = $result['user_name'];
    }
 
    /**

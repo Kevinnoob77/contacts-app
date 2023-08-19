@@ -2,6 +2,10 @@
 
 require 'includes/app.php';
 
+if (is_authenticate()) {
+   header("Location: home.php");
+}
+
 use Contacts\Models\User;
 
 $user = new User('', '', '');
@@ -14,6 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
    $error = $user->get_error();
    if (!$error) {
+      session_start();
+      $user->set_attributes();
+
+      $_SESSION["id"] = $user->get_id();
+      $_SESSION["username"] = $user->get_username();
+      $_SESSION["email"] = $user->get_email();
+
       header("Location: home.php");
    }
 }

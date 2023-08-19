@@ -8,6 +8,10 @@ ini_set('display_errors', 'On');
 
 require 'includes/app.php';
 
+if (!is_authenticate()) {
+  header("Location: index.php");
+}
+
 use Contacts\Models\Category;
 use Contacts\Models\Contact;
 
