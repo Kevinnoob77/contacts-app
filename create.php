@@ -41,8 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       move_uploaded_file($contact->get_image()['tmp_name'], IMAGES_PATH . $contact->get_image_name());
     }
 
-    $contact->save(); // Insert into database
-    header("Location: home.php?action=" . CREATE_SUCCESS_CODE);
+    $contact->save($_SESSION["user_id"]); // Insert into database
+    $_SESSION["flash"] = ["message" => "Contact created successfully."];
+    header("Location: home.php");
+    return;
   }
 }
 

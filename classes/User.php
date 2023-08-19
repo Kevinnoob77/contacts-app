@@ -46,7 +46,6 @@ class User
    }
 
    public function set_attributes(): void {
-      debug($this->_email);
       $statement = Database::get_instance()->query("SELECT * FROM users WHERE email = '$this->_email'");
       $result = $statement->fetch(PDO::FETCH_ASSOC);
 

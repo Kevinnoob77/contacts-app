@@ -15,8 +15,8 @@ class Category
   public function __construct(private string $name) {
   }
 
-  public function save() {
-    $stmt = Database::get_instance()->prepare("INSERT INTO categories(name) VALUES(:name)");
+  public function save($user_id) {
+    $stmt = Database::get_instance()->prepare("INSERT INTO categories(user_id, name) VALUES($user_id, :name)");
     $stmt->execute([':name' => $this->name]);
   }
 
@@ -29,7 +29,7 @@ class Category
 
   public static function find_all(): array {
     $categories = array();
-    $stmt = Database::get_instance()->query("SELECT * FROM categories ORDER BY id");
+    $stmt = Database::get_instance()->query("SELECT * FROM categories WHERE user_id = {$_SESSION["user_id"]} ORDER BY id");
     
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
       array_push($categories, self::create_from_array($row));
@@ -52,6 +52,24 @@ class Category
     Database::get_instance()->prepare("DELETE FROM categories WHERE id = :id")->execute([":id" => $this->id]);
   }
 
+  public static function create_default_category($default_cat, $user_id): void {
+    Database::get_instance()->query("INSERT INTO categories(name, created, user_id) VALUES('$default_cat', NOW(), $user_id)");
+  }
+
+  public function existing_category(): bool {
+    $stmt = Database::get_instance()->prepare("SELECT * FROM categories WHERE user_id = :user_id AND LOWER(name) = LOWER(:name)");
+    $stmt->execute([":name" => $this->name, ":user_id" => $_SESSION["user_id"]]);
+    
+    return $stmt->rowCount() > 0;
+  }
+
+  public function existing_category_edit(): bool {
+    $stmt = Database::get_instance()->prepare("SELECT * FROM categories WHERE user_id = :user_id AND LOWER(name) = LOWER(:name) AND id != $this->id");
+    $stmt->execute([":name" => $this->name, ":user_id" => $_SESSION["user_id"]]);
+    
+    return $stmt->rowCount() > 0;
+  }
+
   public static function has_contacts(int $cat_id): bool {
     $query = Database::get_instance()->prepare("SELECT * FROM contacts WHERE category_id = :cat_id");
     $query->execute([":cat_id" => $cat_id]);
@@ -71,9 +89,14 @@ class Category
     return $category;
   }
 
-  public function getError(): string|bool {
+  public function getError($section = null): string|bool {
     if (strlen($this->name) == 0)
       return self::ERROR_INVALID_NAME;
+    if ($section == 'edit') {
+      return $this->existing_category_edit() ? "Category \"$this->name\" registered!" : false;
+    }
+    if ($this->existing_category())
+      return "Category \"$this->name\" registered!";
 
     return false;
   }

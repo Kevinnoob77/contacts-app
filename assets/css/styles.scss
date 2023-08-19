@@ -199,9 +199,9 @@ h3 {
   top: 13%;
 }
 
-
 .alert.error.categ {
-  top: 15%;
+  position: absolute;
+  top: 28%;
 }
 
 .alert.success {
@@ -435,7 +435,7 @@ body.login-page {
 
     img {
       min-height: 160px;
-      max-height: 240px;
+      max-height: 250px;
       width: 100%;
     }
   }

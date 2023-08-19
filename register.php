@@ -6,6 +6,7 @@ if (is_authenticate()) {
    header("Location: home.php");
 }
 
+use Contacts\Models\Category;
 use Contacts\Models\User;
 
 $user = new User('', '', '');
@@ -22,9 +23,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    if (!$error) {
       if (!$user->existing_user()) {
          $user->save();
-         session_start();
-         $_SESSION["username"] = $user->get_username();
+         $user->set_attributes();
+         
+         $_SESSION["user_id"] = $user->get_id();
+         $_SESSION["user_name"] = $user->get_username();
          $_SESSION["email"] = $user->get_email();
+         Category::create_default_category(DEFAULT_CATEGORY, $_SESSION["user_id"]);
          header("Location: home.php");
          return;
       }

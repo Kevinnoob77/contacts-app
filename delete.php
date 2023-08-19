@@ -3,8 +3,8 @@
 require 'includes/app.php';
 
 if (!is_authenticate()) {
-  header("Location: index.php");
-  return;
+   header("Location: index.php");
+   return;
 }
 
 use Contacts\Config\Database;
@@ -17,9 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    $r = $stmt->fetch();
 
    if (Contact::delete($id)) {
-      header("Location: home.php?action=" . DELETE_SUCCESS_CODE);
-   } else {
-      die("Error: Contact not found!" . PHP_EOL);
+      $_SESSION["flash"] = ["message" => "Contact removed successfully."];
+      header("Location: home.php");
+      return;
    }
-
+   die("Error: Contact not found!" . PHP_EOL);
 }

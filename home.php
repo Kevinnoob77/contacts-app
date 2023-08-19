@@ -4,6 +4,7 @@ require 'includes/app.php';
 
 if (!is_authenticate()) {
   header("Location: index.php");
+  return;
 }
 
 use Contacts\Models\Contact;
@@ -11,7 +12,7 @@ use Contacts\Config\Database;
 
 $contacts = Contact::find_all();
 
-$action_code = isset($_GET['action']) ? $_GET['action'] : null;
+// $action_code = isset($_GET['action']) ? $_GET['action'] : null;
 
 include_template('header');
 
@@ -20,14 +21,15 @@ include_template('header');
 
 <main class="section container">
 
-  <?php if (filter_var($action_code, FILTER_VALIDATE_INT) && isset($success_messages[$action_code])) : ?>
+  <?php if (isset($_SESSION["flash"])) : ?>
     <div class="center-alert">
       <div class="alert success">
-        <p><?= get_success_message($action_code, 'Contact') ?></p>
+        <p><?= $_SESSION["flash"]["message"] ?></p>
       </div>
     </div>
+  <?php unset($_SESSION["flash"]); ?>
   <?php endif ?>
-
+  
   <?php if (count($contacts) == 0) { ?>
     <div class="without-contacts text-center">
       <p>You have no contacts</p>

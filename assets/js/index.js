@@ -7,6 +7,11 @@ document.addEventListener('DOMContentLoaded', function (e) {
     }, 4000);
   }
 
+  document.querySelectorAll('.inactive')
+    .forEach((btn) => btn.addEventListener('click', (e) => {
+      e.preventDefault();
+    }));
+
   // const deleteCategory = document.querySelectorAll('#delete-btn');
   // const modal = document.querySelector('#modal');
   // const modalToggle = document.querySelector('.modal-toggle');

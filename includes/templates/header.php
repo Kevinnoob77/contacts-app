@@ -41,9 +41,13 @@ $login_pages = $uri == '/' || $uri == '/index.php' || $uri == '/register.php';
             <a class="nav-link" href="/categories/categories.php">Categories</a>
           <?php } ?>
         </div>
-        <?php if (isset($_SESSION["username"])) : ?>
+        <?php if (isset($_SESSION["user_name"])) : ?>
           <div class="nav-email-logout">
-            <a href="logout.php">Log out</a>
+            <?php if (str_contains($uri, "categories")) : ?>
+              <a href="../logout.php">Log out</a>
+            <?php else : ?>
+              <a href="logout.php">Log out</a>
+            <?php endif; ?>
             <p class="email"><?= $_SESSION["email"] ?></p>
           </div>
         <?php endif ?>

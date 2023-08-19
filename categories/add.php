@@ -3,7 +3,7 @@
 require '../includes/app.php';
 
 if (!is_authenticate()) {
-  header("Location: index.php");
+  header("Location: ../index.php");
 }
 
 use Contacts\Models\Category;
@@ -19,11 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    $error = $category->getError();
 
    if (!$error) {
-      $category->save();
-      header('Location: categories.php?action=' . CREATE_SUCCESS_CODE);
+      $category->save($_SESSION["user_id"]);
+      $_SESSION["flash"] = ["message" => "New category added."];
+      header('Location: categories.php');
+      return;
    }
 }
-
+   
 include_template('header');
 
 ?>

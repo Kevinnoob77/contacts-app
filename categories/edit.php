@@ -26,10 +26,12 @@ if ($category == null)
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    $category->set_name($_POST['name']);
 
-   $error = $category->getError();
+   $error = $category->getError('edit');
    if (!$error) {
       $category->update();
-      header('Location: categories.php?action=' . UPDATE_SUCCESS_CODE);
+      $_SESSION["flash"] = ["message" => "Category updated successfully."];
+      header('Location: categories.php');
+      return;
    }
 }
 

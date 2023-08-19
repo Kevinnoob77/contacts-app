@@ -1,6 +1,7 @@
 <?php
 
 define("TEMPLATES_PATH", __DIR__ . '/templates/');
+define("DEFAULT_CATEGORY", "Default");
 // Without __DIR__
 // define("TEMPLATES_PATH", 'templates/');
 
@@ -28,5 +29,5 @@ function debug($var) {
 
 function is_authenticate(): bool {
   session_start();
-  return $_SESSION["username"] ?? false;
+  return $_SESSION["user_name"] ?? false;
 }

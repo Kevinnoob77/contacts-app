@@ -18,14 +18,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
    $error = $user->get_error();
    if (!$error) {
-      session_start();
       $user->set_attributes();
 
-      $_SESSION["id"] = $user->get_id();
-      $_SESSION["username"] = $user->get_username();
+      // session_start();
+      $_SESSION["user_id"] = $user->get_id();
+      $_SESSION["user_name"] = $user->get_username();
       $_SESSION["email"] = $user->get_email();
 
       header("Location: home.php");
+      return;
    }
 }
 

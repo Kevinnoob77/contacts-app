@@ -25,6 +25,7 @@ class Contact
   private array   $image; // Represents the image information received from the server with $_FILES
   private int     $category_id;
   private string  $category_name;
+  private int     $user_id;
 
   public function __construct() {
     $this->name = '';
@@ -35,8 +36,8 @@ class Contact
     $this->maternal_last_name = null;
   }
 
-  public function save() {
-    $stmt = self::get_connection()->prepare("INSERT INTO contacts(name, paternal_last_name, maternal_last_name, phone_number, email, category_id, image) VALUES (:name, :paternal_last_name, :maternal_last_name, :phone_number, :email, :category_id, :image)");
+  public function save($userid) {
+    $stmt = self::get_connection()->prepare("INSERT INTO contacts(user_id, name, paternal_last_name, maternal_last_name, phone_number, email, category_id, image) VALUES ($userid, :name, :paternal_last_name, :maternal_last_name, :phone_number, :email, :category_id, :image)");
 
     $stmt->execute([
       ":name" => $this->name,
@@ -89,8 +90,11 @@ class Contact
   }
 
   public static function find_all(): array {
+    // session_start();
     $contacts = array();
-    $stmt = self::get_connection()->query("SELECT contacts.*, categories.name as category_name FROM contacts INNER JOIN categories ON contacts.category_id = categories.id");
+    $stmt = self::get_connection()->query("SELECT contacts.*, categories.name as category_name FROM contacts
+                                           INNER JOIN categories ON contacts.category_id = categories.id
+                                           WHERE contacts.user_id = {$_SESSION["user_id"]}");
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
       $contact = self::create_from_array($row);
@@ -150,6 +154,7 @@ class Contact
     $contact->set_maternal_last_name($arr['maternal_last_name']);
     $contact->image['name'] = $arr['image']; // Solo se agrega el nombre al array image porque en el parametro $arr viene como un string (el nombre)
     $contact->category_id = $arr['category_id'];
+    $contact->user_id = $arr['user_id'];
 
     return $contact;
   }
@@ -213,4 +218,24 @@ class Contact
   
   public function get_category_name(): string { return $this->category_name; }
 
+
+  /**
+   * Get the value of user_id
+   */ 
+  public function get_user_id()
+  {
+    return $this->user_id;
+  }
+
+  /**
+   * Set the value of user_id
+   *
+   * @return  self
+   */ 
+  public function set_user_id($user_id)
+  {
+    $this->user_id = $user_id;
+
+    return $this;
+  }
 }
