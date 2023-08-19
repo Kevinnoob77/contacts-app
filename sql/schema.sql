@@ -13,6 +13,13 @@ CREATE TABLE IF NOT EXISTS categories(
 
 INSERT INTO categories(name, created) VALUES('default', NOW());
 
+CREATE TABLE users(
+  id int(11) AUTO_INCREMENT PRIMARY KEY,
+  user_name varchar(80) NOT NULL,
+  email varchar(80) NOT NULL UNIQUE,
+  passoword varchar(80) NOT NULL
+);
+
 CREATE TABLE IF NOT  EXISTS contacts(
   id int(11) NOT NULL AUTO_INCREMENT,
   name VARCHAR(60) NOT NULL,

@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace Contacts\Models;
 
@@ -9,6 +8,14 @@ use PDOException;
 
 class Contact
 {
+  const MAX_FILE_SIZE = 1024 * 1024; // 1 megabyte
+  const ERROR_NAME_REQUIRED = "The name is required";
+  const ERROR_PHONE_NUMBER_REQUIRED = "The phone number is required";
+  const ERROR_INVALID_PHONE_NUMBER = "Invalid phone number (9 - 12 digits)";
+  const ERROR_INVALID_EMAIL = "Please enter a valid email";
+  const ERROR_CATEGORY_REQUIRED = "Please select a category";
+  const ERROR_IMAGE_TOO_LARGE = "The image is too large (max 1mb)";
+
   private int     $id;
   private string  $name;
   private ?string $paternal_last_name;
@@ -18,14 +25,6 @@ class Contact
   private array   $image; // Represents the image information received from the server with $_FILES
   private int     $category_id;
   private string  $category_name;
-
-  const MAX_FILE_SIZE = 1024 * 1024; // 1 megabyte
-  const ERROR_NAME_REQUIRED = "The name is required";
-  const ERROR_PHONE_NUMBER_REQUIRED = "The phone number is required";
-  const ERROR_INVALID_PHONE_NUMBER = "Invalid phone number (9 - 12 digits)";
-  const ERROR_INVALID_EMAIL = "Please enter a valid email";
-  const ERROR_CATEGORY_REQUIRED = "Please select a category";
-  const ERROR_IMAGE_TOO_LARGE = "The image is too large (max 1mb)";
 
   public function __construct() {
     $this->name = '';
@@ -91,8 +90,7 @@ class Contact
 
   public static function find_all(): array {
     $contacts = array();
-    $stmt =
-      self::get_connection()->query("SELECT contacts.*, categories.name as category_name FROM contacts INNER JOIN categories ON contacts.category_id = categories.id");
+    $stmt = self::get_connection()->query("SELECT contacts.*, categories.name as category_name FROM contacts INNER JOIN categories ON contacts.category_id = categories.id");
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
       $contact = self::create_from_array($row);

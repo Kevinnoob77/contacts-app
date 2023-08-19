@@ -172,12 +172,8 @@ h3 {
   padding: 1.2rem 1rem;
   border-radius: 5px;
 
-  // position: absolute;
-  // top: 13%;
-  // @media (max-width: 120rem) {
   position: relative;
   margin: 0 0 2rem;
-  // }
 
   @media (max-width: $tablet) {
     width: 90%;
@@ -185,17 +181,24 @@ h3 {
 
   width: 65rem;
 
-  p {
+  p span {
     // font-size: 1.8rem;
+    font-size: 1.4rem;
+  }
+  .error span {
   }
 }
 
 .alert.error {
   background-color: $red;
-  margin: 5rem 0 0;
+  // margin: 5rem 0 0;
+}
+
+.alert.error.absolute {
   position: absolute;
   top: 7%;
 }
+
 
 .alert.error.categ {
   top: 15%;
@@ -262,15 +265,15 @@ body.login-page {
     margin-bottom: 2rem;
   }
 
-  p {
+  .desc {
     margin-top: 2.5rem;
     font-size: 2rem;
-      // font-weight: 600;
+    // font-weight: 600;
   }
 
   h3 {
     font-size: 2.8rem;
-      font-weight: 600;
+    font-weight: 600;
     // color: rgb(37, 137, 231);
   }
 
@@ -281,7 +284,22 @@ body.login-page {
 }
 
 .login-form {
-  margin-top: 4rem;
+  margin-top: 3rem;
+
+  .alert {
+    margin-bottom: 2rem;
+    padding: 1rem;
+
+    @media (max-width: $tablet) {
+      width: 100%;
+    }
+
+    width: 60rem;
+
+    p {
+      font-size: 1.6rem;
+    }
+  }
 
   .field {
     display: flex;

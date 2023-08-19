@@ -48,7 +48,7 @@ include_template('header');
 
 <div class="center-alert">
   <?php if ($error) { ?>
-    <div class="alert error">
+    <div class="alert error absolute">
       <p><?= $error ?></p>
     </div>
   <?php } ?>
